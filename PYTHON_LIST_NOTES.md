@@ -86,3 +86,21 @@ x in my_set
 - 判断某个值是否存在
 - 去重
 - 记录访问过的元素
+
+## 6. `isalnum()`
+
+`c.isalnum()` 用来判断一个字符是不是字母或数字。
+
+```python
+'a'.isalnum()   # True
+'Z'.isalnum()   # True
+'3'.isalnum()   # True
+' '.isalnum()   # False
+'?'.isalnum()   # False
+```
+
+刷题时常用在：
+
+- 跳过空格
+- 跳过标点
+- 判断一个字符是不是有效字母数字字符
