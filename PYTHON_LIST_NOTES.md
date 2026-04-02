@@ -104,3 +104,144 @@ x in my_set
 - 跳过空格
 - 跳过标点
 - 判断一个字符是不是有效字母数字字符
+
+## 7. `set.add()` 和 `set.remove()`
+
+### `set.add(x)`
+
+把 `x` 加入集合。
+
+```python
+s = set()
+s.add('a')
+```
+
+如果 `x` 已经在集合里，不会报错，也不会重复添加。
+
+### `set.remove(x)`
+
+把 `x` 从集合里删除。
+
+```python
+s = {'a', 'b'}
+s.remove('a')
+```
+
+如果 `x` 不在集合里，会报错。
+
+### 和 `discard()` 的区别
+
+```python
+s.discard(x)
+```
+
+如果 `x` 不在集合里，不会报错。
+
+## 8. 刷题时怎么用
+
+在滑动窗口里常见写法：
+
+```python
+chars = set()
+
+chars.add(s[right])
+chars.remove(s[left])
+```
+
+意思是：
+
+- `add()`：把新进入窗口的元素放进去
+- `remove()`：把离开窗口的元素删掉
+
+## 9. `float('inf')`
+
+`float('inf')` 表示正无穷。
+
+```python
+x = float('inf')
+```
+
+刷题时常用来初始化“最小值答案”。
+
+例如：
+
+```python
+min_len = float('inf')
+```
+
+意思是：
+
+- 先假设当前最小值非常大
+- 后面一旦遇到真正答案，就可以用 `min()` 去更新
+
+常见用法：
+
+```python
+min_len = float('inf')
+min_len = min(min_len, new_value)
+```
+
+最后如果发现它还是 `float('inf')`，通常说明没有找到有效答案。
+
+例如：
+
+```python
+return 0 if min_len == float('inf') else min_len
+```
+
+## 10. `del dict[key]`
+
+```python
+del count[key]
+```
+
+作用是：
+
+- 直接删除字典里的这个键值对
+
+例如：
+
+```python
+count = {'a': 2, 'b': 1}
+del count['b']
+# count = {'a': 2}
+```
+
+刷题时常见场景：
+
+- 某个字符计数减到 `0`
+- 这个键已经没有保留意义
+- 直接删掉，让字典更干净
+
+例如：
+
+```python
+count[s[left]] -= 1
+if count[s[left]] == 0:
+    del count[s[left]]
+```
+
+## 11. 两个字典可以直接比较
+
+Python 里两个字典可以直接用 `==` 比较。
+
+```python
+count == target
+```
+
+返回 `True` 的条件是：
+
+- 键完全相同
+- 每个键对应的值也完全相同
+
+例如：
+
+```python
+{'a': 2, 'b': 1} == {'b': 1, 'a': 2}   # True
+{'a': 2} == {'a': 1}                   # False
+{'a': 2} == {'a': 2, 'b': 0}           # False
+```
+
+刷题时常用来判断：
+
+- 当前窗口计数是否和目标计数完全一样
